@@ -1,7 +1,17 @@
 # blog-api
 
+
+install mysql and configure 
+
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
+
+init database and table
+
+
 ```
 CREATE DATABASE IF NOT EXISTS blog;
+
+use blog;
 
 CREATE TABLE IF NOT EXISTS articles (
     id INT AUTO_INCREMENT,
@@ -14,10 +24,11 @@ CREATE TABLE IF NOT EXISTS articles (
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
- `````````
+`````````
 
-Use below command to run: 
+run node server 
 
 ```
-$ nohup node app.js &
+$ npm install forever -g
+$ nohup forever start app.js &
 ```

@@ -18,16 +18,15 @@ connection.connect(function(err){
   if(!err) {
       console.log("Database is connected ... nn");    
   } else {
-      console.log("Error connecting database ... nn" + err);    
+      throw new Error(err);
   }
 });
 
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => res.send('Hello World!'))
 
-app.get('/articles', (req, res) => {
-  var sql = 'SELECT id, type, title, created_at, tags, overview from articles';
+app.get('/articles', (req, res, next) => {
+  var sql = 'SELECT id, type, title, created_at, tags, overview from articles orde ORDER BY created_at DESC';
   if(req.query && req.query.type) {
     sql += ' where type = "' + req.query.type + '"';
   }
@@ -36,24 +35,24 @@ app.get('/articles', (req, res) => {
     let result = JSON.parse(JSON.stringify(rows))
     let resp = {code: 1, body: result}
     if (!err)
-      res.json(resp);
+      res.send(resp);
     else
-      console.log('Error while performing Query.');
+      next(err);
     });
 })
 
 
-app.get('/article/:id', (req, res) => {
+app.get('/article/:id', (req, res, next) => {
   connection.query('SELECT * from articles where id = ' + req.params.id, function(err, rows, fields) {
     let result = JSON.parse(JSON.stringify(rows))
     if (!err && result.length > 0)
       res.json({code: 1, body: result[0]});
     else
-      console.log('Error while performing Query.');
+    next(err);
     });
 })
 
-app.post('/article', (req, res) => {
+app.post('/article', (req, res, next) => {
   var d  = req.body;
 
   if(d.token !== token) {
@@ -62,13 +61,16 @@ app.post('/article', (req, res) => {
   } else if(d.id) {
     q = ['UPDATE articles SET type= ?, title= ?, created_at= ?, tags= ?, overview= ?, content=? WHERE id= ?', [d.type, d.title, d.created_at, d.tags, d.overview, d.content, d.id]]
   } else {
-    q = ['INSERT INTO articles(type, title, created_at, tags, overview, content) VALUES ("' + d.type + '", "' + d.title + '", "' + d.created_at + '", "' + d.tags + '", "' + d.overview + '", "' + d.content + '")'];
+    q = ['INSERT INTO articles(type, title, created_at, tags, overview, content) VALUES (?, ?, ?, ?, ?, ?)', [d.type, d.title, d.created_at, d.tags, d.overview, d.content]];
   }
+  console.log([0]);
   connection.query(...q, function(err, rows, fields) {
-    if (!err) 
-      res.json({code:1,body:1});
+    if (!err) {
+      console.log({code:1,body: d.id || rows.insertId});
+      res.json({code:1,body: d.id || rows.insertId});
+    }
     else {
-      console.log('Error while performing Query.');
+      next(err);
     }
     });
   })

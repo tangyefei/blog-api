@@ -1,12 +1,24 @@
 # blog-api
 
 
-install mysql and configure 
+Install mysql and configure 
+
+on centos
 
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
 
-init database and table
+on mac
 
+https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html
+
+
+login into mysql
+
+```
+/usr/local/mysql/bin/mysql -u root -p
+```
+
+init database and table
 
 ```
 CREATE DATABASE IF NOT EXISTS blog;

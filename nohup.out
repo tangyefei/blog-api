@@ -4,3 +4,164 @@ Database is connected ... nn
 please read token from local env rather hard code!
 Example app listening on port 8000!
 Database is connected ... nn
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Error connecting database ... nnError: connect ECONNREFUSED 127.0.0.1:3306
+SELECT id, type, title, created_at, tags, overview from articles
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at Query.<anonymous> (/home/blog-api/app.js:36:23)
+    at Query.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:525:10)
+    at Query._callback (/home/blog-api/node_modules/mysql/lib/Connection.js:491:16)
+    at Query.Sequence.end (/home/blog-api/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at /home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:236:14
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles where type = "read"
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles where type = "tech"
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles where type = "read"
+SELECT id, type, title, created_at, tags, overview from articles where type = "travel"
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles where type = "tech"
+SELECT id, type, title, created_at, tags, overview from articles where type = "tech"
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles where type = "psy"
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+events.js:174
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:97:28)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:194:15)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Emitted 'error' event at:
+    at Connection._handleProtocolError (/home/blog-api/node_modules/mysql/lib/Connection.js:426:8)
+    at Protocol.emit (events.js:189:13)
+    at Protocol._delegateError (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+    at Protocol.end (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:97:28)
+    [... lines matching original stack trace ...]
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+Error while performing Query.
+Error while performing Query.
+Error while performing Query.
+SELECT id, type, title, created_at, tags, overview from articles
+Error while performing Query.
+Error while performing Query.
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+events.js:174
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:97:28)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:194:15)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Emitted 'error' event at:
+    at Connection._handleProtocolError (/home/blog-api/node_modules/mysql/lib/Connection.js:426:8)
+    at Protocol.emit (events.js:189:13)
+    at Protocol._delegateError (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:398:10)
+    at Protocol.end (/home/blog-api/node_modules/mysql/lib/protocol/Protocol.js:116:8)
+    at Socket.<anonymous> (/home/blog-api/node_modules/mysql/lib/Connection.js:97:28)
+    [... lines matching original stack trace ...]
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Error connecting database ... nnError: ER_ACCESS_DENIED_ERROR: Access denied for user 'root'@'localhost' (using password: YES)
+please read token from local env rather hard code!
+Example app listening on port 8000!
+Database is connected ... nn
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+SELECT id, type, title, created_at, tags, overview from articles
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+[32minfo[39m:    Forever processing file: [90mapp.js[39m

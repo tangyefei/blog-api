@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 8000
-const token = 'PLACE-TOKEN-DEFINED-HERE-CHANGE-IT-MANNUALLY-ON-SERVER';
+const token = 'ff66068808mm';
 
 console.error('please read token from local env rather hard code!')
 
@@ -10,7 +10,8 @@ var mysql  = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'abcd1234_',
+  insecureAuth: true,
+  password : 'Msw2tuwant.',
   database : 'blog'
 });
 

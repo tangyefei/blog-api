@@ -24,6 +24,15 @@ connection.connect(function(err){
 
 app.use(bodyParser.json())
 
+app.get('/article/del', (req, res, next) => {
+  var d  = req.body;
+  connection.query('DELETE FROM articles WHERE id = "' + d.id + '"', function (err) {
+    if (!err)
+      res.json({code:1});
+    else
+      next(err);
+  })
+});
 
 app.get('/articles', (req, res, next) => {
   var sql = 'SELECT id, type, title, created_at, tags, overview from articles orde ORDER BY created_at DESC';

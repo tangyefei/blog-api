@@ -25,7 +25,7 @@ connection.connect(function(err){
 
 app.use(bodyParser.json())
 
-app.get('/article/del', (req, res, next) => {
+app.post('/manage/article/del', (req, res, next) => {
   var d  = req.body;
   connection.query('DELETE FROM articles WHERE id = "' + d.id + '"', function (err) {
     if (!err)

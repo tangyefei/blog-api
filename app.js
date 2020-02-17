@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors');
 const port = 8000
 const token = 'ff66068808mm';
 
@@ -24,6 +25,7 @@ connection.connect(function(err){
 });
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.post('/manage/article/del', (req, res, next) => {
   var d  = req.body;

@@ -1,78 +1,86 @@
 const express = require('express')
+const cors = require('cors')
+const mongoskin = require('mongoskin')
 const bodyParser = require('body-parser')
+const logger = require('morgan')
+const http = require('http')
+
+
 const app = express()
-const port = 8000
-const token = 'PLACE-TOKEN-DEFINED-HERE-CHANGE-IT-MANNUALLY-ON-SERVER';
-
-console.error('please read token from local env rather hard code!')
-
-var mysql  = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'abcd1234_',
-  database : 'blog'
-});
-
-connection.connect(function(err){
-  if(!err) {
-      console.log("Database is connected ... nn");    
-  } else {
-      throw new Error(err);
-  }
-});
-
+app.use(cors())
 app.use(bodyParser.json())
+app.use(logger())
+app.set('port', process.env.PORT || 3000)
 
+const db = mongoskin.db('mongodb://@localhost:27017/blog');
+const id = mongoskin.helper.toObjectID;
 
-app.get('/articles', (req, res, next) => {
-  var sql = 'SELECT id, type, title, created_at, tags, overview from articles orde ORDER BY created_at DESC';
-  if(req.query && req.query.type) {
-    sql += ' where type = "' + req.query.type + '"';
-  }
-  console.log(sql)
-  connection.query(sql, function(err, rows, fields) {
-    let result = JSON.parse(JSON.stringify(rows))
-    let resp = {code: 1, body: result}
-    if (!err)
-      res.send(resp);
-    else
-      next(err);
-    });
+app.param('collectionName', (req, res, next, collectionName) => {
+  req.collection = db.collection(collectionName)
+  return next()
 })
 
-
-app.get('/article/:id', (req, res, next) => {
-  connection.query('SELECT * from articles where id = ' + req.params.id, function(err, rows, fields) {
-    let result = JSON.parse(JSON.stringify(rows))
-    if (!err && result.length > 0)
-      res.json({code: 1, body: result[0]});
-    else
-    next(err);
-    });
+app.get('/', (req, res, next) => {
+  res.send('/collections/messages')
 })
 
-app.post('/article', (req, res, next) => {
-  var d  = req.body;
+app.get('/collections/:collectionName', (req, res, next) => {
+  req.collection.find({}, {limit: 10, sort: [['_id', -1]]})
+    .toArray((e, results) => {
+      if (e) return next(e)
+      res.send({body:results,code:1})
+    }
+  )
+})
 
-  if(d.token !== token) {
-    res.json({code:0,body:{msg:"无权限操作"}});
-    return;
-  } else if(d.id) {
-    q = ['UPDATE articles SET type= ?, title= ?, created_at= ?, tags= ?, overview= ?, content=? WHERE id= ?', [d.type, d.title, d.created_at, d.tags, d.overview, d.content, d.id]]
-  } else {
-    q = ['INSERT INTO articles(type, title, created_at, tags, overview, content) VALUES (?, ?, ?, ?, ?, ?)', [d.type, d.title, d.created_at, d.tags, d.overview, d.content]];
-  }
-  console.log([0]);
-  connection.query(...q, function(err, rows, fields) {
-    if (!err) {
-      console.log({code:1,body: d.id || rows.insertId});
-      res.json({code:1,body: d.id || rows.insertId});
-    }
-    else {
-      next(err);
-    }
-    });
+app.post('/collections/:collectionName', (req, res, next) => {
+  // TODO: Validate req.body
+  req.collection.insert(req.body, {}, (e, results) => {
+    if (e) return next(e)
+    res.send({body:results,code:1})
   })
+})
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.get('/collections/:collectionName/:id', (req, res, next) => {
+  req.collection.findOne({_id: id(req.params.id)}, (e, result) => {
+    if (e) return next(e)
+    res.send({body:result,code:1})
+  })
+})
+
+app.put('/collections/:collectionName/:id', (req, res, next) => {
+  req.collection.update({_id: id(req.params.id)},
+    {$set: req.body},
+    {safe: true, multi: false}, (e, result) => {
+      if (e) return next(e)
+      res.send((result.result.n === 1) ? {msg: 'success',code:1} : {msg: 'error',code:0})
+    })
+})
+
+app.delete('/collections/:collectionName/:id', (req, res, next) => {
+  req.collection.remove({_id: id(req.params.id)}, (e, result) => {
+    if (e) return next(e)
+    res.send((result.result.n === 1) ? {msg: 'success',code:1} : {msg: 'error',code:0})
+  })
+})
+
+const server = http.createServer(app)
+const boot = () => {
+  server.listen(app.get('port'), () => {
+    console.info(`Express server listening 
+      on port ${app.get('port')}`)
+  })
+}
+
+const shutdown = () => {
+  server.close(process.exit)
+}
+
+if (require.main === module) {
+  boot()
+} else {
+  console.info('Running app as a module')
+  exports.boot = boot
+  exports.shutdown = shutdown
+  exports.port = app.get('port')
+}

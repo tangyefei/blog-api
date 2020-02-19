@@ -52,9 +52,9 @@ app.get('/', (req, res, next) => {
 
 app.post('/login', authenticate)
 
-app.all('/collections', user.authorize)
+// app.all('/collections', user.authorize)
 
-app.get('/collections/:collectionName', (req, res, next) => {
+app.get('/collections/:collectionName', user.authorize, (req, res, next) => {
   req.collection.find({}, {limit: 10, sort: [['_id', -1]]})
     .toArray((e, results) => {
       console.log('req.session:')
@@ -70,7 +70,7 @@ app.get('/collections/:collectionName', (req, res, next) => {
   )
 })
 
-app.post('/collections/:collectionName', (req, res, next) => {
+app.post('/collections/:collectionName', user.authorize, (req, res, next) => {
   // TODO: Validate req.body
   req.collection.insert(req.body, {}, (e, results) => {
     if (e) return next(e)
@@ -78,14 +78,14 @@ app.post('/collections/:collectionName', (req, res, next) => {
   })
 })
 
-app.get('/collections/:collectionName/:id', (req, res, next) => {
+app.get('/collections/:collectionName/:id', user.authorize, (req, res, next) => {
   req.collection.findOne({_id: id(req.params.id)}, (e, result) => {
     if (e) return next(e)
     res.send({body:result,code:1})
   })
 })
 
-app.put('/collections/:collectionName/:id', (req, res, next) => {
+app.put('/collections/:collectionName/:id', user.authorize, (req, res, next) => {
   req.collection.update({_id: id(req.params.id)},
     {$set: req.body},
     {safe: true, multi: false}, (e, result) => {
@@ -94,7 +94,7 @@ app.put('/collections/:collectionName/:id', (req, res, next) => {
     })
 })
 
-app.delete('/collections/:collectionName/:id', (req, res, next) => {
+app.delete('/collections/:collectionName/:id', user.authorize, (req, res, next) => {
   req.collection.remove({_id: id(req.params.id)}, (e, result) => {
     if (e) return next(e)
     res.send((result.result.n === 1) ? {msg: 'success',code:1} : {msg: 'error',code:0})
